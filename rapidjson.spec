@@ -52,7 +52,7 @@ format.  RapidJSON should be in fully compliance with RFC4627/ECMA-404.
 
 Name:			rapidjson
 Version:		0.12
-Release:		0.2%{?gitrel}%{?dist}
+Release:		0.3%{?gitrel}%{?dist}
 Summary:		Fast JSON parser and generator for C++
 
 License:		MIT
@@ -166,6 +166,9 @@ popd
 
 
 %changelog
+* Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.12-0.3.git20140801.67143c2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Sun Aug 17 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.12-0.2.git20140801.67143c2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
