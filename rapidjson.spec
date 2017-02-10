@@ -55,7 +55,7 @@ JSON(JavaScript Object Notation) is a light-weight data exchange	\
 format.  RapidJSON should be in fully compliance with RFC4627/ECMA-404.
 
 Name:		rapidjson
-Version:	1.0.2
+Version:	1.1.0
 Release:	1%{?gitrel}%{?dist}
 Summary:	Fast JSON parser and generator for C++
 
@@ -70,7 +70,7 @@ Source0:	%{giturl}/%{commit}.tar.gz#/%{gittar}
 %endif # 0%%{?rel_build}
 
 # Downstream-patch for gtest.
-Patch0:		rapidjson-1.0.2-do_not_include_gtest_src_dir.patch
+Patch0:		rapidjson-1.1.0-do_not_include_gtest_src_dir.patch
 
 BuildRequires:	cmake
 BuildRequires:	gtest-devel
@@ -135,7 +135,7 @@ done
 
 # Disable -Werror.
 %{_bindir}/find . -type f -name 'CMakeLists.txt' -print0 |			\
-	%{_bindir}/xargs -0 %{__sed} -i -e's![ \t]*-Werror!!g'
+	%{_bindir}/xargs -0 %{__sed} -i -e's![ \t]*-march=native!!g' -e's![ \t]*-Werror!!g'
 
 
 %build
@@ -170,8 +170,8 @@ popd
 
 
 %check
-# Valgrind fails on %%ix86.
-%ifarch %{ix86}
+# Valgrind fails on %%ix86 and aarch64.
+%ifarch %{ix86} aarch64
 CTEST_EXCLUDE=".*valgrind.*"
 %endif # arch %%{ix86}
 pushd %{cmake_build_dir}
@@ -180,6 +180,11 @@ popd
 
 
 %changelog
+* Fri Feb 10 2017 Tom Hughes <tom@compton.nu> - 1.1.0-1
+- Update to 1.1.0 upstream release
+- Drop -march=native as ppc64 doesn't recognise it
+- Exclude valgrind on aarch64 due to unhandled instruction in libgcc
+
 * Sun Apr 03 2016 Björn Esser <fedora@besser82.io> - 1.0.2-1
 - update to latest upstream-release (#1322941)
 
