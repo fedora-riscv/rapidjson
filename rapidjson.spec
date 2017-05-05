@@ -56,7 +56,7 @@ format.  RapidJSON should be in fully compliance with RFC4627/ECMA-404.
 
 Name:		rapidjson
 Version:	1.1.0
-Release:	1%{?gitrel}%{?dist}
+Release:	2%{?gitrel}%{?dist}
 Summary:	Fast JSON parser and generator for C++
 
 License:	MIT
@@ -102,7 +102,10 @@ Provides:	%{name}-static		== %{version}-%{release}
 
 %package doc
 Summary:	Documentation-files for %{name}
+
+%if 0%{?fedora} || 0%{?rhel} >= 8
 BuildArch:	noarch
+%endif # 0%%{?fedora} || 0%%{?rhel} >= 8
 
 BuildRequires:	%{_sbindir}/hardlink
 BuildRequires:	doxygen
@@ -180,6 +183,9 @@ popd
 
 
 %changelog
+* Fri May 05 2017 Björn Esser <besser82@fedoraproject.org> - 1.1.0-2
+- Doc-pkg must be build archful on RHEL <= 7
+
 * Fri Feb 10 2017 Tom Hughes <tom@compton.nu> - 1.1.0-1
 - Update to 1.1.0 upstream release
 - Drop -march=native as ppc64 doesn't recognise it
