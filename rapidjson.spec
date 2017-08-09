@@ -56,7 +56,7 @@ format.  RapidJSON should be in fully compliance with RFC4627/ECMA-404.
 
 Name:		rapidjson
 Version:	1.1.0
-Release:	4%{?gitrel}%{?dist}
+Release:	5%{?gitrel}%{?dist}
 Summary:	Fast JSON parser and generator for C++
 
 License:	MIT
@@ -173,8 +173,8 @@ popd
 
 
 %check
-# Valgrind fails on %%ix86 and aarch64.
-%ifarch %{ix86} aarch64
+# Valgrind fails on %%ix86 and ppc64le.
+%ifarch %{ix86} ppc64le
 CTEST_EXCLUDE=".*valgrind.*"
 %endif # arch %%{ix86}
 pushd %{cmake_build_dir}
@@ -183,6 +183,9 @@ popd
 
 
 %changelog
+* Wed Aug  9 2017 Tom Hughes <tom@compton.nu> - 1.1.0-5
+- Update valgrind exclusions
+
 * Thu Aug 03 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 
