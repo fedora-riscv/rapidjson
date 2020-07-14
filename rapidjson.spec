@@ -98,9 +98,9 @@ ctest -V %{?_smp_mflags}
 
 %files devel
 %license license.txt
-%doc %dir %{_pkgdocdir}
-%doc %{_pkgdocdir}/CHANGELOG.md
-%doc %{_pkgdocdir}/readme*.md
+%dir %{_pkgdocdir}
+%{_pkgdocdir}/CHANGELOG.md
+%{_pkgdocdir}/readme*.md
 %{_libdir}/cmake
 %{_libdir}/pkgconfig/*
 %{_includedir}/%{name}
@@ -108,7 +108,7 @@ ctest -V %{?_smp_mflags}
 
 %files doc
 %license license.txt
-%doc %{_pkgdocdir}
+%{_pkgdocdir}
 
 
 %changelog
