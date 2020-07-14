@@ -15,7 +15,6 @@ BuildRequires:	cmake
 BuildRequires:	gcc-c++
 BuildRequires:	gtest-devel
 BuildRequires:	valgrind
-BuildRequires:	util-linux
 BuildRequires:	doxygen
 
 %description
@@ -90,8 +89,6 @@ find . -type f -name CMakeLists.txt -print0 | \
 %make_install -Cbuild
 cp -a CHANGELOG.md readme*.md %{buildroot}%{_pkgdocdir}
 find %{buildroot} -type f -name 'CMake*.txt' -delete
-hardlink -v %{buildroot}%{_includedir}
-hardlink -v %{buildroot}%{_pkgdocdir}
 
 
 %check
