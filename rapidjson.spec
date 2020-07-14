@@ -56,6 +56,7 @@ Provides:	%{name}-static = %{version}-%{release}
 
 %package doc
 Summary:	Documentation-files for %{name}
+BuildArch:	noarch
 
 %description doc
 This package contains the documentation-files for %{name}.
