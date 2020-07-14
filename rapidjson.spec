@@ -81,7 +81,7 @@ find . -type f -name CMakeLists.txt -print0 | \
 
 
 %build
-%cmake . -Bbuild -DLIB_INSTALL_DIR=%{_datadir} -DDOC_INSTALL_DIR=%{_pkgdocdir} -DGTESTSRC_FOUND=TRUE -DGTEST_SOURCE_DIR=.
+%cmake . -Bbuild -DDOC_INSTALL_DIR=%{_pkgdocdir} -DGTESTSRC_FOUND=TRUE -DGTEST_SOURCE_DIR=.
 %make_build -Cbuild
 
 
@@ -101,8 +101,8 @@ ctest -V %{?_smp_mflags}
 %doc %dir %{_pkgdocdir}
 %doc %{_pkgdocdir}/CHANGELOG.md
 %doc %{_pkgdocdir}/readme*.md
-%{_datadir}/cmake
-%{_datadir}/pkgconfig/*
+%{_libdir}/cmake
+%{_libdir}/pkgconfig/*
 %{_includedir}/%{name}
 
 
