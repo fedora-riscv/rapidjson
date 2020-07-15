@@ -2,7 +2,7 @@
 
 Name:		rapidjson
 Version:	1.1.0
-Release:	13%{?dist}
+Release:	14%{?dist}
 Summary:	Fast JSON parser and generator for C++
 
 License:	MIT
@@ -10,6 +10,9 @@ URL:		http://rapidjson.org/
 Source0:	https://github.com/Tencent/rapidjson/archive/v%{version}/%{name}-%{version}.tar.gz
 # Downstream-patch for gtest
 Patch0:		rapidjson-1.1.0-do_not_include_gtest_src_dir.patch
+
+# valgrind-unittest fails on EPEL8 PowerPC64-LittleEndian only
+Patch1:         rapidjson-disable_valgrind_test.patch
 
 BuildRequires:	cmake
 BuildRequires:	gcc-c++
@@ -63,7 +66,15 @@ This package contains the documentation-files for %{name}.
 
 
 %prep
-%autosetup -p 1 -n %{name}-%{version}
+%autosetup -N -n %{name}-%{version}
+
+%patch0 -p1
+
+%if 0%{?el8}
+%ifarch %{power64}
+%patch1 -p1
+%endif
+%endif
 
 # Remove bundled code
 rm -rf thirdparty
@@ -113,6 +124,9 @@ ctest -V %{?_smp_mflags}
 
 
 %changelog
+* Wed Jul 15 2020 Antonio Trande <sagitter@fedoraproject.org> - 1.1.0-14
+- Exclude Valgrind Unittest on EPEL8-ppc64le (rhbz#1855859)
+
 * Tue Jul 14 2020 Tom Hughes <tom@compton.nu> - 1.1.0-13
 - Install pkg-config and cmake files to arched location
 - Build documentation as noarch

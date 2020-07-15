@@ -1,0 +1,17 @@
+--- a/test/unittest/CMakeLists.orig.txt	2016-08-25 09:59:05.000000000 +0200
++++ b/test/unittest/CMakeLists.txt	2020-07-12 13:58:09.673454279 +0200
+@@ -77,7 +77,7 @@
+     COMMAND ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/unittest
+     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+ 
+-if(NOT MSVC)
++if(NOT UNIX)
+     # Not running SIMD.* unit test cases for Valgrind
+     add_test(NAME valgrind_unittest
+         COMMAND valgrind --leak-check=full --error-exitcode=1 ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/unittest --gtest_filter=-SIMD.*
+@@ -89,4 +89,4 @@
+         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+     endif(CMAKE_BUILD_TYPE STREQUAL "Debug")
+ 
+-endif(NOT MSVC)
++endif(NOT UNIX)
