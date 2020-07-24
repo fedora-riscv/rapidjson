@@ -82,19 +82,18 @@ find . -type f -name CMakeLists.txt -print0 | \
 
 
 %build
-%cmake . -Bbuild -DDOC_INSTALL_DIR=%{_pkgdocdir} -DGTESTSRC_FOUND=TRUE -DGTEST_SOURCE_DIR=.
-%make_build -Cbuild
+%cmake -DDOC_INSTALL_DIR=%{_pkgdocdir} -DGTESTSRC_FOUND=TRUE -DGTEST_SOURCE_DIR=.
+%cmake_build
 
 
 %install
-%make_install -Cbuild
+%cmake_install
 cp -a CHANGELOG.md readme*.md %{buildroot}%{_pkgdocdir}
 find %{buildroot} -type f -name 'CMake*.txt' -delete
 
 
 %check
-cd build
-ctest -V %{?_smp_mflags}
+%ctest
 
 
 %files devel
