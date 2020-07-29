@@ -2,7 +2,7 @@
 
 Name:		rapidjson
 Version:	1.1.0
-Release:	13%{?dist}
+Release:	14%{?dist}
 Summary:	Fast JSON parser and generator for C++
 
 License:	MIT
@@ -112,6 +112,9 @@ find %{buildroot} -type f -name 'CMake*.txt' -delete
 
 
 %changelog
+* Wed Jul 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.0-14
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
 * Tue Jul 14 2020 Tom Hughes <tom@compton.nu> - 1.1.0-13
 - Install pkg-config and cmake files to arched location
 - Build documentation as noarch
