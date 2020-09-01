@@ -10,6 +10,8 @@ URL:		http://rapidjson.org/
 Source0:	https://github.com/Tencent/rapidjson/archive/v%{version}/%{name}-%{version}.tar.gz
 # Downstream-patch for gtest
 Patch0:		rapidjson-1.1.0-do_not_include_gtest_src_dir.patch
+# Upstream derived patch for C++20 support
+Patch1:         rapidjson-1.1.0-c++20.patch
 
 BuildRequires:	cmake
 BuildRequires:	gcc-c++
@@ -112,6 +114,9 @@ find %{buildroot} -type f -name 'CMake*.txt' -delete
 
 
 %changelog
+* Tue Sep  1 2020 Tom Hughes <tom@compton.nu> - 1.1.0-14
+- Add patch for C++20 support
+
 * Wed Jul 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.0-14
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
