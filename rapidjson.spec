@@ -2,7 +2,7 @@
 
 Name:		rapidjson
 Version:	1.1.0
-Release:	12%{?dist}
+Release:	13%{?dist}
 Summary:	Fast JSON parser and generator for C++
 
 License:	MIT
@@ -10,6 +10,8 @@ URL:		http://rapidjson.org/
 Source0:	https://github.com/Tencent/rapidjson/archive/v%{version}/%{name}-%{version}.tar.gz
 # Downstream-patch for gtest
 Patch0:		rapidjson-1.1.0-do_not_include_gtest_src_dir.patch
+# Upstream derived patch for C++20 support
+Patch1:         rapidjson-1.1.0-c++20.patch
 
 BuildRequires:	cmake
 BuildRequires:	gcc-c++
@@ -115,6 +117,9 @@ ctest -V %{?_smp_mflags}
 
 
 %changelog
+* Tue Sep  1 2020 Tom Hughes <tom@compton.nu> - 1.1.0-13
+- Add patch for C++20 support
+
 * Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.0-12
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
