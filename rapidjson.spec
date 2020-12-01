@@ -13,7 +13,7 @@ Patch0:		rapidjson-1.1.0-do_not_include_gtest_src_dir.patch
 # Upstream derived patch for C++20 support
 Patch1:         rapidjson-1.1.0-c++20.patch
 
-BuildRequires:	cmake
+BuildRequires:	cmake make
 BuildRequires:	gcc-c++
 BuildRequires:	gtest-devel
 BuildRequires:	valgrind
