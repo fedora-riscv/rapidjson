@@ -2,7 +2,7 @@
 
 Name:		rapidjson
 Version:	1.1.0
-Release:	17%{?dist}
+Release:	18%{?dist}
 Summary:	Fast JSON parser and generator for C++
 
 License:	MIT
@@ -13,7 +13,8 @@ Patch0:		rapidjson-1.1.0-do_not_include_gtest_src_dir.patch
 # Upstream derived patch for C++20 support
 Patch1:         rapidjson-1.1.0-c++20.patch
 
-BuildRequires:	cmake make
+BuildRequires:	cmake
+BuildRequires:	make
 BuildRequires:	gcc-c++
 BuildRequires:	gtest-devel
 BuildRequires:	valgrind
@@ -49,7 +50,7 @@ format.  RapidJSON should be in fully compliance with RFC4627/ECMA-404.
 
 %package devel
 Summary:        %{summary}
-Provides:	%{name} = %{version}-%{release}
+Provides:	%{name}%{?_isa} = %{version}-%{release}
 Provides:	%{name}-static = %{version}-%{release}
 
 %description devel
@@ -90,7 +91,7 @@ find . -type f -name CMakeLists.txt -print0 | \
 
 %install
 %cmake_install
-cp -a CHANGELOG.md readme*.md %{buildroot}%{_pkgdocdir}
+install -pm 644 CHANGELOG.md readme*.md %{buildroot}%{_pkgdocdir}/
 find %{buildroot} -type f -name 'CMake*.txt' -delete
 
 
@@ -103,17 +104,20 @@ find %{buildroot} -type f -name 'CMake*.txt' -delete
 %dir %{_pkgdocdir}
 %{_pkgdocdir}/CHANGELOG.md
 %{_pkgdocdir}/readme*.md
-%{_libdir}/cmake
-%{_libdir}/pkgconfig/*
-%{_includedir}/%{name}
+%{_libdir}/cmake/RapidJSON/
+%{_libdir}/pkgconfig/*.pc
+%{_includedir}/%{name}/
 
 
 %files doc
 %license license.txt
-%{_pkgdocdir}
+%{_pkgdocdir}/
 
 
 %changelog
+* Sun Jan 16 2022 Antonio Trande <sagitter@fedoraproject.org> - 1.1.0-18
+- Build for EPEL9
+
 * Fri Jul 23 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.0-17
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
