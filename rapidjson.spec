@@ -86,10 +86,10 @@ find . -type f -name CMakeLists.txt -print0 | \
 
 %build
 %cmake \
-    -DDOC_INSTALL_DIR=%{_pkgdocdir} \
+    -DDOC_INSTALL_DIR:PATH=%{_pkgdocdir} \
     -DRAPIDJSON_BUILD_CXX11:BOOL=OFF \
-    -DGTESTSRC_FOUND=TRUE \
-    -DGTEST_SOURCE_DIR=.
+    -DGTESTSRC_FOUND:BOOL=ON \
+    -DGTEST_SOURCE_DIR:PATH=.
 %cmake_build
 
 
