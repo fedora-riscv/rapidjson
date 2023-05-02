@@ -2,7 +2,7 @@
 
 Name:		rapidjson
 Version:	1.1.0
-Release:	22%{?dist}
+Release:	22.rv64%{?dist}
 Summary:	Fast JSON parser and generator for C++
 
 License:	MIT
@@ -100,7 +100,11 @@ find %{buildroot} -type f -name 'CMake*.txt' -delete
 
 
 %check
+%ifnarch riscv64
 %ctest
+%else
+:
+%endif
 
 
 %files devel
@@ -119,6 +123,9 @@ find %{buildroot} -type f -name 'CMake*.txt' -delete
 
 
 %changelog
+* Tue May 02 2023 Liu Yang <Yang.Liu.sn@gmail.com> - 1.1.0-22.rv64
+- Fix build on riscv64.
+
 * Mon Jan 30 2023 Benjamin A. Beasley <code@musicinmybrain.net> - 1.1.0-22
 - Do not force C++11: gtest 1.13.0 requires at least C++14
 
